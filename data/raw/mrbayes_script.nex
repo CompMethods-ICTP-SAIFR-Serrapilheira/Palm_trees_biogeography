@@ -1,0 +1,24 @@
+#NEXUS
+
+begin mrbayes;
+set autoclose=yes nowarnings=yes;
+
+charset ITS = 1-1089
+
+charset rps16 = 1090-2457
+
+partition wakeru = 2: ITS, rps16
+
+set partition = wakeru
+
+lset applyto=(1) nst=6 rates=gamma
+
+lset applyto=(2) nst=2 rates=gamma
+
+unlink revmat=(all) pinvar=(all) shape=(all) statefreq=(all)
+
+prset applyto=(all) ratepr=variable
+
+mcmc ngen = 1000000 samplefreq = 100 printfreq = 100
+
+end;

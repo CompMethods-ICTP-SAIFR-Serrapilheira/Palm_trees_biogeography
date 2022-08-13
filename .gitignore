@@ -7,3 +7,5 @@
 # Avoiding adding html files
 *.html
 
+# Avoiding the file containing the phylogenetic inference data and softwares
+phylogenetic_inference/

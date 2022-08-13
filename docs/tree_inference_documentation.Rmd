@@ -1,0 +1,35 @@
+---
+title: "Phylogenetic tree inference method documentation"
+author: "Thales"
+date: "2022-08-13"
+output: html_document
+---
+
+This file documents how the phylogenetic tree file `../output/final_consensus_tree_run1.nex` was created. I did this inference outside R because I could not find how to implement the best methods used in phylogenetic inference in R.
+
+```{r setup, include = FALSE}
+library(ape)
+tree <- ape::read.nexus("../output/final_consensus_tree_run1.nex")
+```
+
+This phylogenetic tree includes all genera of the subfamily Calamoideae (Arecaceae) and three outgroup taxa, one for each other subfamily in Arecaceae.
+
+```{r phylotree, echo=FALSE}
+plot.phylo(tree, type = "phylo", cex = 0.5)
+```
+
+## Taxa and marker selection
+  I relied on the studies by Baker et al., 2000ab, which include at least one species from each of the 17 genera of the subfamily Calamoideae. All species from these two studies were included in the analyzes performed here. A GenBank search was performed for chloroplast intron rps16 and nuclear ribosomal internal transcribed spacer (ITS) sequences for the species in this study. I obtained data for all the species in the reference studies plus 6 new species, totaling 36 species of Calamoideae in the data set that was analyzed. The file containing this DNA marker data is `../data/raw/Calamoidea_ITS_rps.nexus`.
+
+
+## Aligment and evolutionary model selection
+  Alignments of both markers were performed online, using the MAFFT v.7 freeware (https://mafft.cbrc.jp/alignment/server/). The settings were left at default, with the exception of the 'strategy' setting, which set to the 'E-INS-i' mode.]
+  The selection of evolutionary models for each marker was performed using the jModelTest2 v.2.1.10 freeware (https://github.com/ddarriba/jmodeltest2). The settings for this program were left at default. The likelihood and the Bayesian information criterion (BIC) of 88 evolutionary models were calculated, and the model with the highest BIC was
+selected. The two markers had their evolutionary models selected separately. The models for ITS and rps16 were, respectively, TIM3ef + G and HKY + G.
+
+## Phylogenetic inference
+  Phylogenetic analysis was performed using the MrBayes v.3.1.2 freeware (http://nbisweden.github.io/MrBayes/index.html). The data matrix was partitioned, allowing different parameters to be incorporated for each of the markers.
+In the MrBayes program most of the settings were left at default, with the exception of: 1) the evolutionary models, which were configured as described in the previous section (one for each partition); 2) the number of generations was established as 1,000,000 (one million) and the sampling frequency was established as every 100 trees; 3) the “unlink” function was used, as recommended in the manual attached to the program, to allow the following parameters to be estimated independently between the partitions: replacement rates of the GTR model (revmat), proportion of invariant sites (pinvar) , the parameters of the gamma curve (shape) and the character frequency states (statefreq); and 4) as also recommended in the manual, the “ratepr” parameter was set as a variable, allowing each partition to have an independent overall site rate of change.
+  The file `../data/raw/mrbayes_script` is a script with the commands used in MrBayes software to do this phylogenetic inference.
+  After the analysis a burn in of 25% was implemented and the remaining trees were compiled in a single consensus tree using the Tracer v1.7.1 freeware (https://beast.community/tracer).
+  The final file of this workflow is the phylogenetic tree in the file `../output/final_consensus_tree_run1.nex`
