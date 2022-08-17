@@ -1,9 +1,5 @@
 #NEXUS
-<<<<<<< HEAD
-[R-package PHYTOOLS, Wed Aug 17 20:01:10 2022]
-=======
-[R-package PHYTOOLS, Wed Aug 17 19:10:38 2022]
->>>>>>> b060a8b729a01822e48f3d206d7f834b958b2abf
+[R-package PHYTOOLS, Wed Aug 17 20:16:45 2022]
 
 BEGIN TAXA;
 	DIMENSIONS NTAX = 39;
@@ -13,10 +9,6 @@ BEGIN TAXA;
 		Calamus_concolor
 		Calamus_conirostris
 		Calamus_deerratus
-<<<<<<< HEAD
-=======
-		Calamus_didymophyllus
->>>>>>> b060a8b729a01822e48f3d206d7f834b958b2abf
 		Calamus_dumetosus
 		Calamus_gracilipes
 		Calamus_hollrungii
@@ -60,17 +52,10 @@ BEGIN TREES;
 		3	Calamus_concolor,
 		4	Calamus_conirostris,
 		5	Calamus_deerratus,
-<<<<<<< HEAD
 		6	Calamus_dumetosus,
 		7	Calamus_gracilipes,
 		8	Calamus_hollrungii,
 		9	Calamus_melanochaetes,
-=======
-		6	Calamus_didymophyllus,
-		7	Calamus_dumetosus,
-		8	Calamus_fissus,
-		9	Calamus_hollrungii,
->>>>>>> b060a8b729a01822e48f3d206d7f834b958b2abf
 		10	Calamus_nanodendron,
 		11	Calamus_thysanolepis,
 		12	Calamus_ursinus,
