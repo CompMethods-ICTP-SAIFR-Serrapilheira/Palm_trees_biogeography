@@ -27,14 +27,33 @@ str(tree)
 plot.phylo(tree, type = "phylogram")
 nodelabels(cex=1, frame = "none")
 
-# The tree is rooted in the node 40, but it should be rooted in node 45, let us fix this
-r_tree <- ape::root(tree, node = 45)
+# Checking the root of the tree
+is.rooted(tree)
+
+# The tree is unrooted, but it should be, let us fix this defining who are the outgroups
+r_tree <- ape::root(tree,
+                    outgroup = c("Nypa_fruticans",
+                                 "Pseudophoenix_vinifera",
+                                 "Trachycarpus_martianus"),
+                    resolve.root = T)
 plot.phylo(r_tree)
+
+is.rooted(r_tree)
 
 # Saving the re-rooted tree
 writeNexus(r_tree, "./output/rerooted_tree.nex")
 
-# Importing the re-rooted tree
-rm(r_tree)
-tree <- read.nexus("./output/rerooted_tree.nex")
-plot.phylo(tree)
+# In the ancestral area reconstruction we are going use the trees must be ultra metric
+# Let us transform this tree in ultrametric using to different methods
+tree.Ult.MPL <- ape::chronoMPL(r_tree) # Mean path length method
+tree.Ult.S <- ape::chronos(r_tree) # Maximum likelihood method
+
+is.ultrametric(tree.Ult.MPL)
+is.ultrametric(tree.Ult.S)
+
+plot(tree.Ult.MPL) # This one has negative branch values, so it will be disregarded
+plot(tree.Ult.S)
+
+# Saving the ultrametric re-rooted tree
+rm(tree.Ult.S)
+writeNexus(tree.Ult.S, "./output/ultra_rerooted_tree.nex")
