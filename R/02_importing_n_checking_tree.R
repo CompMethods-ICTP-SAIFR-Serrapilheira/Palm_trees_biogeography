@@ -55,5 +55,5 @@ plot(tree.Ult.MPL) # This one has negative branch values, so it will be disregar
 plot(tree.Ult.S)
 
 # Saving the ultrametric re-rooted tree
-rm(tree.Ult.S)
 writeNexus(tree.Ult.S, "./output/ultra_rerooted_tree.nex")
+

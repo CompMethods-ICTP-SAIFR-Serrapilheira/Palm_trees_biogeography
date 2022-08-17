@@ -18,7 +18,7 @@ Begin taxa;
 		Calamus_castaneus
 		Calamus_concolor
 		Calamus_dumetosus
-		Calamus_deeratus
+		Calamus_deerratus
 		Plectocomiopsis_geminiflora
 		Plectocomia_mulleri
 		Plectocomia_elongata
@@ -62,7 +62,7 @@ Begin trees;
 		13 Calamus_castaneus,
 		14 Calamus_concolor,
 		15 Calamus_dumetosus,
-		16 Calamus_deeratus,
+		16 Calamus_deerratus,
 		17 Plectocomiopsis_geminiflora,
 		18 Plectocomia_mulleri,
 		19 Plectocomia_elongata,
