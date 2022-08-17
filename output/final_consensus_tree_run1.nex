@@ -9,11 +9,11 @@ Begin taxa;
 		Oncocalamus_mannii
 		Calamus_hollrungii
 		Calamus_nanodendron
-		Calamus_ursinum
+		Calamus_ursinus
 		Calamus_conirostris
 		Calamus_calospathus
-		Calamus_didymophyllus
-		Calamus_fissus
+		Calamus_gracilipes
+		Calamus_melanochaetes
 		Calamus_thysanolepis
 		Calamus_castaneus
 		Calamus_concolor
@@ -53,11 +53,11 @@ Begin trees;
 		4 Oncocalamus_mannii,
 		5 Calamus_hollrungii,
 		6 Calamus_nanodendron,
-		7 Calamus_ursinum,
+		7 Calamus_ursinus,
 		8 Calamus_conirostris,
 		9 Calamus_calospathus,
-		10 Calamus_didymophyllus,
-		11 Calamus_fissus,
+		10 Calamus_gracilipes,
+		11 Calamus_melanochaetes,
 		12 Calamus_thysanolepis,
 		13 Calamus_castaneus,
 		14 Calamus_concolor,
