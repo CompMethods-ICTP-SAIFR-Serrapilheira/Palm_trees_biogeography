@@ -1,11 +1,13 @@
 ---
-title: "Phylogenetic tree inference method documentation"
-author: "Thales"
-date: "2022-08-13"
-output: html_document
+title: "<p style='text-align:center;'><u>Phylogenetic tree inference method documentation</u></p>"
+author: "<p style='text-align:right;'>Written by <b>Thales de Lima &#127796; </b></p>"
+date:  "<p style='text-align:right;'>13/08/2022</p>"
+output: 
+  html_document:
+    theme: darkly
 ---
 
-This file documents how the phylogenetic tree file `../output/final_consensus_tree_run1.nex` was created. I did this inference outside R because I could not find how to implement the best methods used in phylogenetic inference in R.
+This file documents how the phylogenetic tree file <b style="color:#F28C28;">  `../output/final_consensus_tree_run1.nex` </b> was created. I did this inference outside R because I could not find how to implement the best methods used in phylogenetic inference in R.
 
 ```{r setup, include = FALSE}
 library(ape)
@@ -19,7 +21,7 @@ plot.phylo(tree, type = "phylo", cex = 0.5)
 ```
 
 ## Taxa and marker selection
-  I relied on the studies by Baker et al., 2000ab, which include at least one species from each of the 17 genera of the subfamily Calamoideae. All species from these two studies were included in the analyzes performed here. A GenBank search was performed for chloroplast intron rps16 and nuclear ribosomal internal transcribed spacer (ITS) sequences for the species in this study. I obtained data for all the species in the reference studies plus 6 new species, totaling 36 species of Calamoideae in the data set that was analyzed. The file containing this DNA marker data is `../data/raw/Calamoidea_ITS_rps.nexus`.
+I relied on the studies by Baker et al., 2000ab, which include at least one species from each of the 17 genera of the subfamily Calamoideae. All species from these two studies were included in the analyzes performed here. A GenBank search was performed for chloroplast intron rps16 and nuclear ribosomal internal transcribed spacer (ITS) sequences for the species in this study. I obtained data for all the species in the reference studies plus 6 new species, totaling 36 species of Calamoideae in the data set that was analyzed. The file containing this DNA marker data is <b style="color:#F28C28;">`../data/raw/Calamoidea_ITS_rps.nexus`</b>.
 
 
 ## Aligment and evolutionary model selection
@@ -30,6 +32,6 @@ selected. The two markers had their evolutionary models selected separately. The
 ## Phylogenetic inference
   Phylogenetic analysis was performed using the MrBayes v.3.1.2 freeware (http://nbisweden.github.io/MrBayes/index.html). The data matrix was partitioned, allowing different parameters to be incorporated for each of the markers.
 In the MrBayes program most of the settings were left at default, with the exception of: 1) the evolutionary models, which were configured as described in the previous section (one for each partition); 2) the number of generations was established as 1,000,000 (one million) and the sampling frequency was established as every 100 trees; 3) the “unlink” function was used, as recommended in the manual attached to the program, to allow the following parameters to be estimated independently between the partitions: replacement rates of the GTR model (revmat), proportion of invariant sites (pinvar) , the parameters of the gamma curve (shape) and the character frequency states (statefreq); and 4) as also recommended in the manual, the “ratepr” parameter was set as a variable, allowing each partition to have an independent overall site rate of change.
-  The file `../data/raw/mrbayes_script` is a script with the commands used in MrBayes software to do this phylogenetic inference.
+  The file <b style="color:#F28C28;">`../data/raw/mrbayes_script`</b> is a script with the commands used in MrBayes software to do this phylogenetic inference.
   After the analysis a burn in of 25% was implemented and the remaining trees were compiled in a single consensus tree using the Tracer v1.7.1 freeware (https://beast.community/tracer).
-  The final file of this workflow is the phylogenetic tree in the file `../output/final_consensus_tree_run1.nex`
+  The final file of this workflow is the phylogenetic tree in the file <b style="color:#F28C28;">`../output/final_consensus_tree_run1.nex`</b>
