@@ -4,7 +4,7 @@
 ####### Serrapilheira ICTP/SAIRF QBIO program
 
 ####### This script treats the shapefile and occurrence data, outing them in the proper
-####### former to be used in the spp_biogeo_obtention
+####### former to be used in the 05_spp_biogeo_obtention.R script
 
 ####### The shapefiles are not in the GitHub repository for the sake of memory saving
 ####### Nevertheless they are all just fragments of a larger shapefile presented by
