@@ -9,3 +9,13 @@
 
 # Avoiding the file containing the phylogenetic inference data and softwares
 phylogenetic_inference/
+
+# Avoiding the biogeographic regions shapefiles
+data/GIS/Afrotropic
+data/GIS/Australasia
+data/GIS/Indo-Malay
+data/GIS/Neotropic
+
+# Avoiding the spatial objects created by the script 04_spatial_objects.R
+# These can be easily generated from the script and do not need to be saved
+output/GIS
