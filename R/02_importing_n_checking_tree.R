@@ -54,6 +54,15 @@ is.ultrametric(tree.Ult.S)
 plot(tree.Ult.MPL) # This one has negative branch values, so it will be disregarded
 plot(tree.Ult.S)
 
-# Saving the ultrametric re-rooted tree
+# Saving the ultrametric re-rooted tree in both NEXUS and Newick
 writeNexus(tree.Ult.S, "./output/ultra_rerooted_tree.nex")
+write.tree(tree.Ult.S, "./output/ultra_rerooted_tree.newick")
 
+# Saving the ultrametric re-rooted tree in both NEXUS and Newick,
+# withouth the outgroup species
+tree.Ult.S <- drop.tip(tree.Ult.S,tip = c("Nypa_fruticans",
+                                          "Trachycarpus_martianus",
+                                          "Pseudophoenix_vinifera"))
+
+writeNexus(tree.Ult.S, "./output/ultra_rerooted_coregroup_tree.nex")
+write.tree(tree.Ult.S, "./output/ultra_rerooted_coregroup_tree.newick")
