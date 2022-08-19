@@ -1,31 +1,53 @@
-####### Writing began in August 2022 by Thales
+####### Writing began in August 2022 by Thales de Lima
 ####### Written during the course Introduction to Scientific Computation
 ####### Written as part of the final evaluation of this same course
 ####### Serrapilheira ICTP/SAIRF QBIO program
 
-####### This script treats the shapefile and occurrence data, outing them in the proper
-####### former to be used in the 05_spp_biogeo_obtention.R script
+####### This script creates spatial objects for the occurrence records of Calamoideae
+####### subfamily species and for the biogrographic regions inhabited by them.
+####### These spatial objects are used in the 05_spp_biogeo_obtention.R script
 
-####### The shapefiles are not in the GitHub repository for the sake of memory saving
-####### Nevertheless they are all just fragments of a larger shapefile presented by
-####### Olson et al. 2001 Terrestrial Ecorregions of the World: A New Map of Life on Earth
-####### and the instructions to access it are in their article
+####### The shapefile used here with the biogeographic regions of the world
+####### is from the article Olson et al.2001 Terrestrial Ecorregions of the World:
+####### A New Map of Life on Earth. It is not in the GitHub repository for the sake
+####### of memory saving.
+####### Nevertheless it can be downloaded from the following website:
+####### https://www.worldwildlife.org/publications/terrestrial-ecoregions-of-the-world
+####### The downloaded file will be a zip file. You must unzip it and
+####### copy the folder "official" to inside the folder data/GIS/WWF_terr_ecos/
 
 # Library
 library(raster)
 library(dplyr)
+library(maptools)
 
-# Importing biogeographical regions shapefiles and species occurrence points
-Neotropic <- shapefile("data/GIS/Neotropic/Neotropic.shp")
-Indo_Malay <- shapefile("data/GIS/Indo-Malay/Indo-Malay.shp")
-Australasia <- shapefile("data/GIS/Australasia/Australasia_corrected.shp")
-Afrotropic <- shapefile("data/GIS/Afrotropic/Afrotropic.shp")
+### Creating shapefile for biogeographic regions inhabited by subfamily Calamoideae ----------------
 
-coor_spp_clean <- read.csv("./data/processed/coor_spp_clean.csv")
+# Reading the WWF shapefile
+WWF <- shapefile("data/GIS/WWF_terr_ecos/official/wwf_terr_ecos.shp")
 
-# Merging all 4 biogeographic regions polygons --------------------------------------------
-t <- list(Neotropic@polygons[[1]], Afrotropic@polygons[[1]],
-          Indo_Malay@polygons[[1]], Australasia@polygons[[1]])
+# Extracting and merging the polygons of the Neotropic, Afrotropic, Indo-Malay and
+# Australasia biogeographic regions
+NT_poly <- raster::subset(WWF, WWF$REALM == "NT")
+NT_poly_m <- maptools::unionSpatialPolygons(NT_poly, NT_poly$REALM == "NT")
+
+
+AT_poly <- raster::subset(WWF, WWF$REALM == "AT")
+AT_poly_m <- maptools::unionSpatialPolygons(AT_poly, AT_poly$REALM == "AT")
+
+
+IM_poly <- raster::subset(WWF, WWF$REALM == "IM")
+IM_poly_m <- maptools::unionSpatialPolygons(IM_poly, IM_poly$REALM == "IM")
+
+
+AA_poly <- raster::subset(WWF, WWF$REALM == "AA")
+AA_poly_m <- maptools::unionSpatialPolygons(AA_poly, AA_poly$REALM == "AA")
+
+
+
+# Joining all 4 biogeographic regions polygons into one spatial object
+t <- list(NT_poly_m@polygons[[1]], AT_poly_m@polygons[[1]],
+          IM_poly_m@polygons[[1]], AA_poly_m@polygons[[1]])
 ID <- c("A", "B", "C", "D")
 
 for (i in 1:length(ID)) {
@@ -33,7 +55,7 @@ for (i in 1:length(ID)) {
 }
 
 t_p  <- SpatialPolygons(list(t[[1]], t[[2]], t[[3]], t[[4]]),
-                               proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs"))
+                        proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs"))
 
 df <- data.frame(bio_reg = c("Neotropic", "Afrotropic",
                              "Indo_Malay", "Australasia"), row.names = c("A", "B", "C", "D"))
@@ -41,8 +63,7 @@ df <- data.frame(bio_reg = c("Neotropic", "Afrotropic",
 bio_regs <- SpatialPolygonsDataFrame(t_p, data = as.data.frame(df))
 
 
-
-# Creating a spatial object for the occurence points (including subtribe information) ------------------------------------------------
+### Creating a spatial object for the occurence points (including subtribe information) ------------------------------------------------
 spatial_coor_spp <- coor_spp_clean %>%
   dplyr::select(sp_lon, sp_lat) %>%
   sp::SpatialPoints(, proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs"))
@@ -53,10 +74,10 @@ df1 <- data.frame(subtribes = coor_spp_clean$sp_subtribe,
 spatial_coor_spp <- SpatialPointsDataFrame(spatial_coor_spp, data = as.data.frame(df1))
 
 
-# writing spatial objects of occurrences points and biogeographic regions polygons
+### Writing spatial objects of occurrences points and biogeographic regions polygons -------------
 if (!dir.exists("./output/GIS/")) {
   dir.create("./output/GIS/")
 }
 
-shapefile(spatial_coor_spp, "./output/GIS/spatial_coord_spp.shp")
 shapefile(bio_regs, "./output/GIS/bio_regs.shp")
+shapefile(spatial_coor_spp, "./output/GIS/spatial_coord_spp.shp")
