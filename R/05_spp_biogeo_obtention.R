@@ -190,4 +190,4 @@ names(sp3)[1] <- "spp_names"
 spp_bio_reg <- rbind(spp_bio_reg, sp1, sp2, sp3)
 
 # Saving the file with biogeography areas of each species
-write.table(spp_bio_reg, "./output/spp_bio_reg.txt")
+write.table(spp_bio_reg, "./output/spp_bio_reg")
