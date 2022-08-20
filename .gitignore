@@ -12,7 +12,3 @@ phylogenetic_inference/
 
 # Avoiding the biogeographic regions shapefiles
 data/GIS/WWF_terr_ecos
-
-# Avoiding the spatial objects created by the script 04_spatial_objects.R
-# These can be easily generated from the script and do not need to be saved
-output/GIS
