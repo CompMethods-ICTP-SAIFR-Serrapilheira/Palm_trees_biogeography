@@ -98,22 +98,27 @@ resDIVALIKEj <- DIVALIKE_J(trfn = trfn, geogfn = geogfn, max_range_size = max_ob
 
 #### Comparing models through AIC ---------------------------------------------------------
 
-n_par <- 2 # both models have only two parameters
+n_par <- c(3, 2) # the DIVALIKE has 2 parameters and the DIVALIKE+J has 3
 
 # Models negative log likelihood
-DIVALIKE_LnL <- resDIVALIKE[["optim_result"]][["value"]]
-DIVALIKEj_LnL <- resDIVALIKEj[["optim_result"]][["value"]]
+DIVALIKE <- resDIVALIKE[["optim_result"]][["value"]]
+DIVALIKEj<- resDIVALIKEj[["optim_result"]][["value"]]
 
-LnL <- rbind(DIVALIKE_LnL, DIVALIKEj_LnL)
+LnL <- rbind(DIVALIKEj, DIVALIKE)
 
 # AIC calculation
 AIC <- (2*n_par) - (2*LnL)
+delta_AIC <- abs(AIC - min(AIC))
+AIC_table <- cbind(n_par, LnL, AIC, delta_AIC)
 
-colnames(AIC)[1] <- "AIC"
-head(AIC)
+colnames(AIC_table)[4] <- "delta AIC"
+colnames(AIC_table)[3] <- "AIC"
+colnames(AIC_table)[2] <- "LnL"
+colnames(AIC_table)[1] <- "K"
+head(AIC_table)
 
 # Saving AIC table
-write.table(AIC, "./output/model_AIC.txt")
+write.table(AIC_table, "./output/model_AIC.txt")
 
 
 
@@ -127,7 +132,7 @@ areas_col <- c("black", "blue", "lawngreen", "red", "yellow",
 
 # Plot ancestral states - DIVALIKE+J in pdf
 pdffn = "./figs/Calamoideae_DIVALIKE+J_M0_unconstrained_v1.pdf"
-pdf(pdffn, width=12, height=10)
+pdf(pdffn, width=12, height=8)
 analysis_titletxt ="BioGeoBEARS DIVALIKE+J on Calamoideae M0_unconstrained"
 
 # Setup
@@ -136,14 +141,14 @@ scriptdir = np(system.file("extdata/a_scripts", package="BioGeoBEARS"))
 
 # Pie chart
 plot_BioGeoBEARS_results(results_object, analysis_titletxt,
-                         addl_params=list("j"), plotwhat="pie",
-                         label.offset=0.02, tipcex=0.9, statecex=0.8,
-                         titlecex=0.8, plotsplits = F,
+                         addl_params= F, plotwhat="pie",
+                         label.offset=0.02, tipcex=0.9, statecex=0.4,
+                         titlecex=1, plotsplits = F,
                          cornercoords_loc=scriptdir,
                          include_null_range=TRUE, tr=tr,
                          tipranges=tipranges,
                          pie_tip_statecex = 0.1, tiplabel_adj  = -2,
-                         plotlegend = T,
+                         plotlegend = F,
                          colors_list_for_states = areas_col, xlims=NULL,
                          xlab = "")
 

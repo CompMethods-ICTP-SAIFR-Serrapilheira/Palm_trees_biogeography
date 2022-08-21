@@ -33,20 +33,23 @@ MyPalette2 <- c("#00E5FF", "#FF8F00", "#FF3D00", "#000000",
                 "#76FF03", "#0F00C4", "#6200EA", "#FFEE07")
 
 # Writing the png map with the biogeographic regions and subtribes species occurences
-pdf("./figs/t_subfamilies_maps.pdf", width = 7, height = 12)
+pdf("./figs/t_subfamilies_maps.pdf", width = 6, height = 4)
 p <- tm_shape(shapefile("data/GIS/World_Boundaries/World_Countries__Generalized_.shp")) +
   tm_borders(col = "grey") +
   tm_shape(spatial_bio_regs) +
   tm_fill('bio_reg',
           palette = MyPalette1, alpha = 0.2) +
   tm_shape(spatial_coord_spp) +
-  tm_symbols(size = 0.2, shape = 21, col = "subtribes",
-             palette = MyPalette2) +
-  tm_layout(legend.outside = TRUE, legend.outside.position = "bottom",
-            legend.text.size = 1.5, legend.title.color = "white",
-            legend.stack = "horizontal")
+  tm_dots(size = 0.05, col = "subtribes",
+             palette = MyPalette2, legend.is.portrait = T) +
+  tm_layout(legend.outside.position = "bottom",
+            legend.text.size = 1, legend.title.color = "white")
 p
 dev.off()
+cmdstr = paste("open ", path, sep="")
+system(cmdstr)
+
+graphics.off()
 
 
 
