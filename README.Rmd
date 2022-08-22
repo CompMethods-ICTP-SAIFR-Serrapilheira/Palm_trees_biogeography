@@ -16,10 +16,13 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
+Author: Thales Moreira de Lima (thalesdrago@gmail.com)
+Instructors: Sara Mortara and Andrea Sanchéz-Tapia
 This project is the final assignment of the Scientific Computing course that took place during 2022 as part of the Serrapilheira/ICTP-SAIFR Quantitative Biology Program.
 
+August, 2022
 
-The folder structure of this project is the following:
+## Folder structure
 
 ```
 project/
