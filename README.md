@@ -6,15 +6,25 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
+Author: Thales Moreira de Lima (<thalesdrago@gmail.com>) Instructors:
+Sara Mortara and Andrea Sanchéz-Tapia
+
 This project is the final assignment of the Scientific Computing course
 that took place during 2022 as part of the Serrapilheira/ICTP-SAIFR
 Quantitative Biology Program.
 
-The folder structure of this project is the following:
+The idea of this project is to use biogeographic models to combine
+biogeographic data and a phylogeny and infer the ancestral range of the
+palms (Arecaceae) of the subfamily Arecaceae.
+
+August, 2022
+
+## Folder structure
 
     project/
          ├── biblio/
     *    ├── data/
+         │   ├── GIS
     *    │   ├── raw
     *    │   └── processed
          ├── docs/
@@ -27,8 +37,8 @@ The folder structure of this project is the following:
 -   In the `biblio` directory you will find the bibliographical library
     in .bib format.
 -   In the `data` directory you will find the raw data of the project in
-    the `raw` directory and the processed one in the `processed`
-    directory.
+    the `raw` directory, the processed one in the `processed` directory.
+    And the `GIS` directory contains spatial data.
 -   In the `docs` directory you will find text files like .pdf and .Rmd
     files.
 -   In the `figs` directory you will find image files like .png files.
