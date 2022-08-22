@@ -23,17 +23,18 @@
 ### Based at in the tutorial available at the package's GitHub page
 
 # Install the rexpokit and cladoRcpp packages, both available on CRAN
-#install.packages("rexpokit")
-#install.packages("cladoRcpp")
+install.packages("rexpokit")
+install.packages("cladoRcpp")
 
 # Install the new version of BioGeoBEARS from GitHub, using devtools:
-#library(devtools)
-#devtools::install_github(repo="nmatzke/BioGeoBEARS")
+library(devtools)
+devtools::install_github(repo="nmatzke/BioGeoBEARS")
+# When it asks which library do you want to update, select none (usaully option #3)
 
 # If step #2 keeps trying to reinstall rexpokit and cladoRcpp from scratch (including
 # demanding a compiler like gcc or gfortran) even though they are already
 # installed, try adding "dependencies=FALSE":
-# devtools::install_github(repo="nmatzke/BioGeoBEARS", dependencies=FALSE)
+ devtools::install_github(repo="nmatzke/BioGeoBEARS", dependencies=FALSE)
 
 # If you hit other needed dependencies, install them individually from CRAN,
 # then re-run the command above.

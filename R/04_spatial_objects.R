@@ -87,5 +87,7 @@ if (!dir.exists("./output/GIS/")) {
   dir.create("./output/GIS/")
 }
 
-shapefile(bio_regs, "./output/GIS/bio_regs.shp")
+#shapefile(bio_regs, "./output/GIS/bio_regs.shp") # if you have runned the commented shapefile
+# codelines in the first session, uncomment this line to save the generated shapefile
+# As said, this shapefile is already in the GitHub repository.
 shapefile(spatial_coor_spp, "./output/GIS/spatial_coord_spp.shp")

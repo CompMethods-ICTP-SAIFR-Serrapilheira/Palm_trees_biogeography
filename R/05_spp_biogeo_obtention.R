@@ -33,7 +33,8 @@ MyPalette2 <- c("#00E5FF", "#FF8F00", "#FF3D00", "#000000",
                 "#76FF03", "#0F00C4", "#6200EA", "#FFEE07")
 
 # Writing the png map with the biogeographic regions and subtribes species occurences
-pdf("./figs/t_subfamilies_maps.pdf", width = 6, height = 4)
+path <- "./figs/t_subfamilies_maps.pdf"
+pdf(path, width = 6, height = 4)
 p <- tm_shape(shapefile("data/GIS/World_Boundaries/World_Countries__Generalized_.shp")) +
   tm_borders(col = "grey") +
   tm_shape(spatial_bio_regs) +
@@ -72,7 +73,7 @@ br <- NULL
 for (i in 1:length(spp_names)) {
   br  <- spp_coord_bio_reg %>%
     filter(sp_name == spp_names[i]) %>%
-    select(bio_reg) %>%
+    dplyr::select(bio_reg) %>%
     unique() %>%
     as.vector() %>%
     unlist()
